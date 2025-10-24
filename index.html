@@ -15,10 +15,8 @@
                 <nav>
                     <ul>
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Catálogo</a></li>
-                        <li><a href="#">Categorías</a></li>
-                        <li><a href="#">Mi Cuenta</a></li>
-                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#catalogo">Catálogo</a></li>
+                        <li><a href="#categorias">Categorías</a></li>
                     </ul>
                 </nav>
             </div>
@@ -30,7 +28,7 @@
         <div class="container">
             <h1>Explora Nuestra Colección Virtual</h1>
             <p>Accede a miles de libros digitales de forma gratuita. Literatura, ciencia, historia y mucho más a tu alcance.</p>
-            <a href="#" class="btn">Explorar Catálogo</a>
+            <a href="#catalogo" class="btn">Explorar Catálogo</a>
         </div>
     </section>
 
@@ -38,28 +36,28 @@
     <section class="search-section">
         <div class="container">
             <div class="search-box">
-                <input type="text" placeholder="Buscar libros, autores, categorías...">
-                <button>Buscar</button>
+                <input type="text" id="search-input" placeholder="Buscar libros, autores, categorías...">
+                <button id="search-button">Buscar</button>
             </div>
         </div>
     </section>
 
     <!-- Catálogo de libros -->
-    <section class="catalog">
+    <section class="catalog" id="catalogo">
         <div class="container">
             <h2 class="section-title">Libros Destacados</h2>
             <div class="books-grid" id="books-grid">
-                <!-- Los libros se cargarán dinámicamente con JavaScript -->
+                <!-- Los libros se cargarán con JavaScript -->
             </div>
         </div>
     </section>
 
     <!-- Sección de categorías -->
-    <section class="categories">
+    <section class="categories" id="categorias">
         <div class="container">
             <h2 class="section-title">Categorías</h2>
             <div class="categories-grid" id="categories-grid">
-                <!-- Las categorías se cargarán dinámicamente con JavaScript -->
+                <!-- Las categorías se cargarán con JavaScript -->
             </div>
         </div>
     </section>
@@ -70,7 +68,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Biblioteca Virtual</h3>
-                    <p>Proyecto de grado 11 - Institución Educativa John F. Kennedy</p>
+                    <p>Proyecto de grado 11</p>
                     <p>Acceso a la cultura y el conocimiento para todos.</p>
                 </div>
                 
@@ -78,24 +76,23 @@
                     <h3>Enlaces Rápidos</h3>
                     <ul>
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Catálogo</a></li>
-                        <li><a href="#">Categorías</a></li>
-                        <li><a href="#">Mi Cuenta</a></li>
+                        <li><a href="#catalogo">Catálogo</a></li>
+                        <li><a href="#categorias">Categorías</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contacto</h3>
+                    <h3>Desarrollado por</h3>
                     <ul>
-                        <li>Email: info@bibliotecavirtual.edu</li>
-                        <li>Teléfono: (123) 456-7890</li>
-                        <li>Dirección: Calle Ejemplo 123, Ciudad</li>
+                        <li>Estudiante de Grado 11</li>
+                        <li>Proyecto Escolar</li>
+                        <li>Tecnología e Informática</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 Biblioteca Virtual - Proyecto Grado 11. Todos los derechos reservados.</p>
+                <p>&copy; 2024 Biblioteca Virtual - Proyecto Grado 11.</p>
             </div>
         </div>
     </footer>
@@ -103,4 +100,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
