@@ -1,4 +1,4 @@
-// Datos de libros REALES - DOMINIO PÚBLICO
+// Datos de libros CON PDFs
 const libros = [
     {
         id: 1,
@@ -11,11 +11,11 @@ const libros = [
     },
     {
         id: 2,
-        titulo: "Cien Años de Soledad", 
-        autor: "Gabriel García Márquez",
+        titulo: "El Aleph",
+        autor: "Jorge Luis Borges",
         categoria: "Literatura",
-        descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo.",
-        pdfUrl: "pdf/cien_anos_soledad.pdf",
+        descripcion: "Colección de cuentos que exploran temas de infinito, tiempo y realidad, incluyendo el famoso cuento 'El Aleph'.",
+        pdfUrl: "pdf/el_aleph.pdf",
         tienePDF: true
     },
     {
@@ -44,19 +44,49 @@ const libros = [
         descripcion: "Clásico de terror gótico sobre la creación de vida artificial y las consecuencias de jugar a ser Dios.",
         pdfUrl: "pdf/frankenstein.pdf", 
         tienePDF: true
+    },
+    {
+        id: 6,
+        titulo: "La Metamorfosis",
+        autor: "Franz Kafka",
+        categoria: "Literatura",
+        descripcion: "Relato sobre Gregorio Samsa, quien una mañana amanece convertido en un monstruoso insecto.",
+        pdfUrl: "pdf/la_metamorfosis.pdf",
+        tienePDF: true
+    },
+    {
+        id: 7,
+        titulo: "Drácula",
+        autor: "Bram Stoker",
+        categoria: "Terror",
+        descripcion: "Novela epistolar que narra los intentos del Conde Drácula por mudarse de Transilvania a Inglaterra.",
+        pdfUrl: "pdf/dracula.pdf",
+        tienePDF: true
+    },
+    {
+        id: 8,
+        titulo: "Romeo y Julieta",
+        autor: "William Shakespeare",
+        categoria: "Teatro",
+        descripcion: "Tragedia romántica sobre dos jóvenes amantes cuyas muertes reconcilian a sus familias enemistadas.",
+        pdfUrl: "pdf/romeo_julieta.pdf",
+        tienePDF: true
     }
+    // AÑADE MÁS LIBROS AQUÍ - TODOS APARECERÁN EN LA PÁGINA PRINCIPAL
 ];
 
-// Categorías disponibles
+// Categorías disponibles - SIN ARTE, TECNOLOGÍA NI MISTERIO
 const categorias = [
     "Literatura Clásica",
     "Literatura", 
     "Literatura Infantil",
     "Literatura Romántica",
     "Ciencia Ficción",
-    "Misterio",
+    "Terror",
+    "Teatro",
+    "Filosofía",
     "Ciencia",
-    "Filosofía"
+    "Historia"
 ];
 
 // Sistema de modo oscuro
@@ -89,7 +119,7 @@ function inicializarModoOscuro() {
     });
 }
 
-// Función para cargar libros en la página
+// Función para cargar libros en la página - AHORA MUESTRA TODOS
 function cargarLibros(librosACargar = libros) {
     const booksGrid = document.getElementById('books-grid');
     booksGrid.innerHTML = '';
@@ -97,6 +127,16 @@ function cargarLibros(librosACargar = libros) {
     if (librosACargar.length === 0) {
         booksGrid.innerHTML = '<p class="no-results">No se encontraron libros. Intenta con otros términos de búsqueda.</p>';
         return;
+    }
+
+    // Actualizar el título para mostrar el total de libros
+    const sectionTitle = document.querySelector('.section-title');
+    if (sectionTitle) {
+        if (librosACargar.length === libros.length) {
+            sectionTitle.textContent = `Todos Nuestros Libros (${libros.length})`;
+        } else {
+            sectionTitle.textContent = `Libros Encontrados (${librosACargar.length})`;
+        }
     }
 
     librosACargar.forEach((libro, index) => {
@@ -191,7 +231,7 @@ function mostrarModalError(mensaje) {
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
-// Función para cargar categorías
+// Función para cargar categorías - SIN ARTE, TECNOLOGÍA NI MISTERIO
 function cargarCategorias() {
     const categoriesGrid = document.getElementById('categories-grid');
     categoriesGrid.innerHTML = '';
@@ -216,6 +256,15 @@ function cargarCategorias() {
 function filtrarPorCategoria(categoria) {
     const librosFiltrados = libros.filter(libro => libro.categoria === categoria);
     cargarLibros(librosFiltrados);
+    
+    document.getElementById('catalogo').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+}
+
+// Función para mostrar todos los libros (resetear filtro)
+function mostrarTodosLosLibros() {
+    cargarLibros(libros);
     
     document.getElementById('catalogo').scrollIntoView({ 
         behavior: 'smooth' 
@@ -433,6 +482,12 @@ const modalStyles = `
 .descargar-btn:hover {
     color: var(--accent-pink);
 }
+
+.show-all-btn {
+    display: block;
+    margin: 2rem auto;
+    text-align: center;
+}
 </style>
 `;
 
@@ -443,7 +498,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar funcionalidades
     inicializarModoOscuro();
-    cargarLibros();
+    cargarLibros(); // Ahora muestra TODOS los libros
     cargarCategorias();
     inicializarBusqueda();
     
@@ -460,8 +515,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-// Función para animaciones de fondo (si la tienes)
-function crearAnimacionesFondo() {
-    // Tu código existente para animaciones
-}
