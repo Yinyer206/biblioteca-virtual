@@ -1,60 +1,64 @@
 // Datos de ejemplo para los libros
+// Datos de libros CON TUS PDFs REALES
 const libros = [
     {
         id: 1,
         titulo: "Cien Años de Soledad",
         autor: "Gabriel García Márquez",
         categoria: "Literatura",
-        descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo."
+        descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo.",
+        pdfUrl: "pdf/cien_anos_soledad.pdf", // ← Nombre exacto de tu archivo
+        tienePDF: true
     },
     {
         id: 2,
         titulo: "Don Quijote de la Mancha",
         autor: "Miguel de Cervantes",
         categoria: "Literatura Clásica",
-        descripcion: "La obra cumbre de la literatura española que sigue las aventuras del ingenioso hidalgo Don Quijote y su fiel escudero Sancho Panza."
+        descripcion: "La obra cumbre de la literatura española que sigue las aventuras del ingenioso hidalgo Don Quijote y su fiel escudero Sancho Panza.",
+        pdfUrl: "pdf/don_quijote.pdf", // ← Nombre exacto de tu archivo
+        tienePDF: true
     },
     {
         id: 3,
         titulo: "Rayuela",
         autor: "Julio Cortázar",
         categoria: "Literatura",
-        descripcion: "Una novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección, explorando el amor y la existencia."
+        descripcion: "Una novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección, explorando el amor y la existencia.",
+        pdfUrl: "pdf/rayuela.pdf", // ← Nombre exacto de tu archivo
+        tienePDF: true
     },
     {
         id: 4,
         titulo: "La Sombra del Viento",
         autor: "Carlos Ruiz Zafón",
         categoria: "Misterio",
-        descripcion: "Una novela de misterio ambientada en la Barcelona de posguerra, donde un joven descubre un libro maldito que cambiará su vida."
+        descripcion: "Una novela de misterio ambientada en la Barcelona de posguerra, donde un joven descubre un libro maldito que cambiará su vida.",
+        pdfUrl: "pdf/sombra_viento.pdf", // ← Nombre exacto de tu archivo
+        tienePDF: true
     },
     {
         id: 5,
         titulo: "Física Universitaria",
         autor: "Sears y Zemansky",
         categoria: "Ciencia",
-        descripcion: "Libro de texto fundamental para el estudio de la física a nivel universitario, con explicaciones claras y ejercicios prácticos."
+        descripcion: "Libro de texto fundamental para el estudio de la física a nivel universitario, con explicaciones claras y ejercicios prácticos.",
+        pdfUrl: "pdf/fisica_universitaria.pdf", // ← Nombre exacto de tu archivo
+        tienePDF: true
     },
     {
         id: 6,
         titulo: "Breve Historia del Tiempo",
         autor: "Stephen Hawking",
         categoria: "Ciencia",
-        descripcion: "Una exploración accesible de conceptos complejos como los agujeros negros, el Big Bang y la naturaleza del tiempo."
+        descripcion: "Una exploración accesible de conceptos complejos como los agujeros negros, el Big Bang y la naturaleza del tiempo.",
+        pdfUrl: "pdf/breve_historia_tiempo.pdf", // ← Nombre exacto de tu archivo
+        tienePDF: true
     }
+    // AÑADE MÁS LIBROS SEGÚN LOS PDFs QUE TENGAS
 ];
 
-// Categorías disponibles
-const categorias = [
-    "Literatura",
-    "Ciencia",
-    "Historia",
-    "Filosofía",
-    "Arte",
-    "Tecnología",
-    "Misterio",
-    "Literatura Clásica"
-];
+// ... el resto de tu código JavaScript se mantiene igual ...
 
 // Sistema de modo oscuro
 function inicializarModoOscuro() {
@@ -414,3 +418,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
