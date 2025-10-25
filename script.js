@@ -1,16 +1,7 @@
-// Datos de libros CON PDFs
+// Datos de libros REALES - DOMINIO PÚBLICO
 const libros = [
     {
         id: 1,
-        titulo: "Cien Años de Soledad",
-        autor: "Gabriel García Márquez",
-        categoria: "Literatura",
-        descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo.",
-        pdfUrl: "pdf/cien_anos_soledad.pdf",
-        tienePDF: true
-    },
-    {
-        id: 2,
         titulo: "Don Quijote de la Mancha",
         autor: "Miguel de Cervantes",
         categoria: "Literatura Clásica",
@@ -19,54 +10,53 @@ const libros = [
         tienePDF: true
     },
     {
-        id: 3,
-        titulo: "Rayuela",
-        autor: "Julio Cortázar",
+        id: 2,
+        titulo: "Cien Años de Soledad", 
+        autor: "Gabriel García Márquez",
         categoria: "Literatura",
-        descripcion: "Una novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección, explorando el amor y la existencia.",
-        pdfUrl: "pdf/rayuela.pdf",
+        descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo.",
+        pdfUrl: "pdf/cien_anos_soledad.pdf",
+        tienePDF: true
+    },
+    {
+        id: 3,
+        titulo: "El Principito",
+        autor: "Antoine de Saint-Exupéry", 
+        categoria: "Literatura Infantil",
+        descripcion: "Fábula poética sobre un niño que vive en un asteroide y explora temas de amistad, amor y pérdida.",
+        pdfUrl: "pdf/el_principito.pdf",
         tienePDF: true
     },
     {
         id: 4,
-        titulo: "La Sombra del Viento",
-        autor: "Carlos Ruiz Zafón",
-        categoria: "Misterio",
-        descripcion: "Una novela de misterio ambientada en la Barcelona de posguerra, donde un joven descubre un libro maldito que cambiará su vida.",
-        pdfUrl: "pdf/sombra_viento.pdf",
+        titulo: "Orgullo y Prejuicio",
+        autor: "Jane Austen",
+        categoria: "Literatura Romántica", 
+        descripcion: "Una comedia romántica que explora las costumbres y la vida de la clase alta inglesa durante el siglo XIX.",
+        pdfUrl: "pdf/orgullo_prejuicio.pdf",
         tienePDF: true
     },
     {
         id: 5,
-        titulo: "Física Universitaria",
-        autor: "Sears y Zemansky",
-        categoria: "Ciencia",
-        descripcion: "Libro de texto fundamental para el estudio de la física a nivel universitario, con explicaciones claras y ejercicios prácticos.",
-        pdfUrl: "pdf/fisica_universitaria.pdf",
-        tienePDF: true
-    },
-    {
-        id: 6,
-        titulo: "Breve Historia del Tiempo",
-        autor: "Stephen Hawking",
-        categoria: "Ciencia",
-        descripcion: "Una exploración accesible de conceptos complejos como los agujeros negros, el Big Bang y la naturaleza del tiempo.",
-        pdfUrl: "pdf/breve_historia_tiempo.pdf",
+        titulo: "Frankenstein",
+        autor: "Mary Shelley",
+        categoria: "Ciencia Ficción",
+        descripcion: "Clásico de terror gótico sobre la creación de vida artificial y las consecuencias de jugar a ser Dios.",
+        pdfUrl: "pdf/frankenstein.pdf", 
         tienePDF: true
     }
-    // AÑADE MÁS LIBROS AQUÍ
 ];
 
 // Categorías disponibles
 const categorias = [
-    "Literatura",
-    "Ciencia",
-    "Historia",
-    "Filosofía",
-    "Arte",
-    "Tecnología",
+    "Literatura Clásica",
+    "Literatura", 
+    "Literatura Infantil",
+    "Literatura Romántica",
+    "Ciencia Ficción",
     "Misterio",
-    "Literatura Clásica"
+    "Ciencia",
+    "Filosofía"
 ];
 
 // Sistema de modo oscuro
@@ -172,12 +162,33 @@ function leerPDF(id) {
     const libro = libros.find(l => l.id === id);
     
     if (!libro.tienePDF) {
-        alert('Este libro no tiene PDF disponible.');
+        mostrarModalError('Este libro no tiene PDF disponible.');
         return;
     }
 
     // Abrir PDF en nueva pestaña
-    window.open(libro.pdfUrl, '_blank');
+    const pdfWindow = window.open(libro.pdfUrl, '_blank');
+    
+    // Verificar si se pudo abrir
+    if (!pdfWindow || pdfWindow.closed || typeof pdfWindow.closed == 'undefined') {
+        mostrarModalError('No se pudo abrir el PDF. Puede que el archivo no exista o el navegador bloqueó la ventana emergente.');
+    }
+}
+
+// Función para mostrar error
+function mostrarModalError(mensaje) {
+    const modalHTML = `
+        <div class="modal-overlay">
+            <div class="modal">
+                <h3>❌ Error</h3>
+                <p>${mensaje}</p>
+                <div class="modal-actions">
+                    <button class="btn secundario" onclick="cerrarModal()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
 // Función para cargar categorías
@@ -432,7 +443,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar funcionalidades
     inicializarModoOscuro();
-    crearAnimacionesFondo();
     cargarLibros();
     cargarCategorias();
     inicializarBusqueda();
