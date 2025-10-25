@@ -1,5 +1,4 @@
-// Datos de ejemplo para los libros
-// Datos de libros CON TUS PDFs REALES
+// Datos de libros CON PDFs
 const libros = [
     {
         id: 1,
@@ -7,7 +6,7 @@ const libros = [
         autor: "Gabriel García Márquez",
         categoria: "Literatura",
         descripcion: "Una obra maestra del realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo.",
-        pdfUrl: "pdf/cien_anos_soledad.pdf", // ← Nombre exacto de tu archivo
+        pdfUrl: "pdf/cien_anos_soledad.pdf",
         tienePDF: true
     },
     {
@@ -16,7 +15,7 @@ const libros = [
         autor: "Miguel de Cervantes",
         categoria: "Literatura Clásica",
         descripcion: "La obra cumbre de la literatura española que sigue las aventuras del ingenioso hidalgo Don Quijote y su fiel escudero Sancho Panza.",
-        pdfUrl: "pdf/don_quijote.pdf", // ← Nombre exacto de tu archivo
+        pdfUrl: "pdf/don_quijote.pdf",
         tienePDF: true
     },
     {
@@ -25,7 +24,7 @@ const libros = [
         autor: "Julio Cortázar",
         categoria: "Literatura",
         descripcion: "Una novela innovadora que puede leerse de forma lineal o siguiendo un tablero de dirección, explorando el amor y la existencia.",
-        pdfUrl: "pdf/rayuela.pdf", // ← Nombre exacto de tu archivo
+        pdfUrl: "pdf/rayuela.pdf",
         tienePDF: true
     },
     {
@@ -34,7 +33,7 @@ const libros = [
         autor: "Carlos Ruiz Zafón",
         categoria: "Misterio",
         descripcion: "Una novela de misterio ambientada en la Barcelona de posguerra, donde un joven descubre un libro maldito que cambiará su vida.",
-        pdfUrl: "pdf/sombra_viento.pdf", // ← Nombre exacto de tu archivo
+        pdfUrl: "pdf/sombra_viento.pdf",
         tienePDF: true
     },
     {
@@ -43,7 +42,7 @@ const libros = [
         autor: "Sears y Zemansky",
         categoria: "Ciencia",
         descripcion: "Libro de texto fundamental para el estudio de la física a nivel universitario, con explicaciones claras y ejercicios prácticos.",
-        pdfUrl: "pdf/fisica_universitaria.pdf", // ← Nombre exacto de tu archivo
+        pdfUrl: "pdf/fisica_universitaria.pdf",
         tienePDF: true
     },
     {
@@ -52,13 +51,23 @@ const libros = [
         autor: "Stephen Hawking",
         categoria: "Ciencia",
         descripcion: "Una exploración accesible de conceptos complejos como los agujeros negros, el Big Bang y la naturaleza del tiempo.",
-        pdfUrl: "pdf/breve_historia_tiempo.pdf", // ← Nombre exacto de tu archivo
+        pdfUrl: "pdf/breve_historia_tiempo.pdf",
         tienePDF: true
     }
-    // AÑADE MÁS LIBROS SEGÚN LOS PDFs QUE TENGAS
+    // AÑADE MÁS LIBROS AQUÍ
 ];
 
-// ... el resto de tu código JavaScript se mantiene igual ...
+// Categorías disponibles
+const categorias = [
+    "Literatura",
+    "Ciencia",
+    "Historia",
+    "Filosofía",
+    "Arte",
+    "Tecnología",
+    "Misterio",
+    "Literatura Clásica"
+];
 
 // Sistema de modo oscuro
 function inicializarModoOscuro() {
@@ -68,7 +77,6 @@ function inicializarModoOscuro() {
     themeToggle.setAttribute('aria-label', 'Cambiar modo claro/oscuro');
     document.body.appendChild(themeToggle);
 
-    // Verificar preferencia del sistema
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
     
@@ -91,48 +99,6 @@ function inicializarModoOscuro() {
     });
 }
 
-// Animaciones de fondo
-function crearAnimacionesFondo() {
-    const backgroundAnimation = document.createElement('div');
-    backgroundAnimation.className = 'background-animation';
-    
-    const floatingShapes = document.createElement('div');
-    floatingShapes.className = 'floating-shapes';
-    
-    const particles = document.createElement('div');
-    particles.className = 'particles';
-    
-    // Crear formas flotantes
-    for (let i = 1; i <= 4; i++) {
-        const shape = document.createElement('div');
-        shape.className = `shape shape-${i}`;
-        floatingShapes.appendChild(shape);
-    }
-    
-    // Crear partículas
-    for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        const size = Math.random() * 8 + 2;
-        const left = Math.random() * 100;
-        const animationDuration = Math.random() * 10 + 10;
-        const animationDelay = Math.random() * 5;
-        
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${left}%`;
-        particle.style.animationDuration = `${animationDuration}s`;
-        particle.style.animationDelay = `${animationDelay}s`;
-        
-        particles.appendChild(particle);
-    }
-    
-    backgroundAnimation.appendChild(floatingShapes);
-    backgroundAnimation.appendChild(particles);
-    document.body.insertBefore(backgroundAnimation, document.body.firstChild);
-}
-
 // Función para cargar libros en la página
 function cargarLibros(librosACargar = libros) {
     const booksGrid = document.getElementById('books-grid');
@@ -147,27 +113,48 @@ function cargarLibros(librosACargar = libros) {
         const bookCard = document.createElement('div');
         bookCard.className = 'book-card';
         bookCard.style.animationDelay = `${index * 0.1}s`;
+        
+        const badgePDF = libro.tienePDF ? '<span class="pdf-badge">PDF</span>' : '';
+        
         bookCard.innerHTML = `
-            <div class="book-cover">${libro.titulo}</div>
+            <div class="book-cover">
+                ${badgePDF}
+                <div>${libro.titulo}</div>
+            </div>
             <div class="book-info">
                 <div class="book-title">${libro.titulo}</div>
                 <div class="book-author">${libro.autor}</div>
                 <div class="book-category">${libro.categoria}</div>
                 <div class="book-actions">
-                    <a href="#" class="leer-btn" data-id="${libro.id}">Leer</a>
+                    ${libro.tienePDF ? 
+                        `<a href="#" class="btn leer-pdf-btn" data-id="${libro.id}">Leer PDF</a>` : 
+                        `<a href="#" class="btn leer-btn" data-id="${libro.id}">Leer</a>`
+                    }
                     <a href="#" class="detalles-btn" data-id="${libro.id}">Detalles</a>
+                    ${libro.tienePDF ? 
+                        `<a href="${libro.pdfUrl}" class="descargar-btn" download>Descargar</a>` : 
+                        ''
+                    }
                 </div>
             </div>
         `;
         booksGrid.appendChild(bookCard);
     });
 
-    // Agregar event listeners a los botones
+    // Agregar event listeners
     document.querySelectorAll('.leer-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             const id = parseInt(this.getAttribute('data-id'));
             leerLibro(id);
+        });
+    });
+
+    document.querySelectorAll('.leer-pdf-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const id = parseInt(this.getAttribute('data-id'));
+            leerPDF(id);
         });
     });
 
@@ -178,6 +165,19 @@ function cargarLibros(librosACargar = libros) {
             mostrarDetalles(id);
         });
     });
+}
+
+// Función para leer PDF
+function leerPDF(id) {
+    const libro = libros.find(l => l.id === id);
+    
+    if (!libro.tienePDF) {
+        alert('Este libro no tiene PDF disponible.');
+        return;
+    }
+
+    // Abrir PDF en nueva pestaña
+    window.open(libro.pdfUrl, '_blank');
 }
 
 // Función para cargar categorías
@@ -191,7 +191,6 @@ function cargarCategorias() {
         categoryCard.style.animationDelay = `${index * 0.1}s`;
         categoryCard.textContent = categoria;
         categoryCard.addEventListener('click', () => {
-            // Efecto de clic
             categoryCard.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 categoryCard.style.transform = '';
@@ -207,22 +206,22 @@ function filtrarPorCategoria(categoria) {
     const librosFiltrados = libros.filter(libro => libro.categoria === categoria);
     cargarLibros(librosFiltrados);
     
-    // Scroll suave a la sección de catálogo
     document.getElementById('catalogo').scrollIntoView({ 
         behavior: 'smooth' 
     });
 }
 
-// Función para simular la lectura de un libro
+// Función para simular la lectura de un libro (sin PDF)
 function leerLibro(id) {
     const libro = libros.find(l => l.id === id);
     const modalHTML = `
         <div class="modal-overlay">
             <div class="modal">
-                <h3>📖 Leyendo: "${libro.titulo}"</h3>
-                <p>Esta funcionalidad simula la lectura del libro. En una implementación real, aquí se integraría un visor de PDF o EPUB.</p>
+                <h3>📖 ${libro.titulo}</h3>
+                <p>Este libro actualmente no tiene versión PDF disponible.</p>
+                <p><strong>Disponible pronto en formato digital.</strong></p>
                 <div class="modal-actions">
-                    <button class="btn" onclick="cerrarModal()">Cerrar</button>
+                    <button class="btn secundario" onclick="cerrarModal()">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -233,15 +232,25 @@ function leerLibro(id) {
 // Función para mostrar detalles de un libro
 function mostrarDetalles(id) {
     const libro = libros.find(l => l.id === id);
+    const pdfInfo = libro.tienePDF ? 
+        `<p><strong>Formato:</strong> PDF disponible</p>
+         <p><strong>Acciones:</strong> Leer online o descargar</p>` : 
+        `<p><strong>Formato:</strong> Próximamente en PDF</p>`;
+    
     const modalHTML = `
         <div class="modal-overlay">
             <div class="modal">
                 <h3>${libro.titulo}</h3>
                 <p><strong>Autor:</strong> ${libro.autor}</p>
                 <p><strong>Categoría:</strong> ${libro.categoria}</p>
+                ${pdfInfo}
                 <p><strong>Descripción:</strong> ${libro.descripcion}</p>
                 <div class="modal-actions">
-                    <button class="btn" onclick="leerLibro(${libro.id})">Leer Libro</button>
+                    ${libro.tienePDF ? 
+                        `<button class="btn" onclick="leerPDF(${libro.id})">Leer PDF</button>
+                         <a href="${libro.pdfUrl}" class="btn" download>Descargar</a>` : 
+                        `<button class="btn" onclick="leerLibro(${libro.id})">Más Información</button>`
+                    }
                     <button class="btn secundario" onclick="cerrarModal()">Cerrar</button>
                 </div>
             </div>
@@ -273,7 +282,6 @@ function inicializarBusqueda() {
         }
     });
 
-    // Efecto de focus en la búsqueda
     searchInput.addEventListener('focus', function() {
         this.parentElement.style.transform = 'scale(1.02)';
     });
@@ -295,18 +303,30 @@ function realizarBusqueda() {
         
         cargarLibros(resultados);
         
-        // Scroll a resultados
         document.getElementById('catalogo').scrollIntoView({ 
             behavior: 'smooth' 
         });
     } else {
-        cargarLibros(); // Recargar todos los libros si la búsqueda está vacía
+        cargarLibros();
     }
 }
 
 // Estilos para modales
 const modalStyles = `
 <style>
+.pdf-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent-pink);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -370,6 +390,7 @@ const modalStyles = `
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 .btn.secundario {
@@ -389,6 +410,17 @@ const modalStyles = `
     font-size: 1.3rem;
     padding: 3rem;
     animation: fadeIn 0.6s ease-out;
+}
+
+.descargar-btn {
+    color: var(--accent-purple);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.descargar-btn:hover {
+    color: var(--accent-pink);
 }
 </style>
 `;
@@ -419,3 +451,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Función para animaciones de fondo (si la tienes)
+function crearAnimacionesFondo() {
+    // Tu código existente para animaciones
+}
