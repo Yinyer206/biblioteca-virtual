@@ -71,8 +71,16 @@ const libros = [
         descripcion: "Tragedia romántica sobre dos jóvenes amantes cuyas muertes reconcilian a sus familias enemistadas.",
         pdfUrl: "pdf/romeo_julieta.pdf",
         tienePDF: true
+   },         
+   {
+        id: 9,
+        titulo: "La Biblia",
+        autor: "Varios autores",
+        categoria: "Religión",
+        descripcion: "Texto sagrado del cristianismo, compuesto por el Antiguo y Nuevo Testamento. Incluye libros históricos, poéticos, proféticos y evangelios.",
+        pdfUrl: "pdf/la_biblia.pdf",
+        tienePDF: true
     }
-    // AÑADE MÁS LIBROS AQUÍ - TODOS APARECERÁN EN LA PÁGINA PRINCIPAL
 ];
 
 // Categorías disponibles - SIN ARTE, TECNOLOGÍA NI MISTERIO
@@ -515,3 +523,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
